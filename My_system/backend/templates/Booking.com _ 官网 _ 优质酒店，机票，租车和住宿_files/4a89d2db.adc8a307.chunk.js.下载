@@ -1,0 +1,2 @@
+"use strict";(self["b-index-lp-web-mfe__LOADABLE_LOADED_CHUNKS__"]=self["b-index-lp-web-mfe__LOADABLE_LOADED_CHUNKS__"]||[]).push([["4a89d2db"],{fe905f7b:function(e,_,n){n.r(_);var b=n("540adcd8");(0,b.serve)((function(){return n.e("0a098284").then(n.bind(n,"64b778ad"))}))}}]);
+//# sourceMappingURL=https://istatic.booking.com/internal-static/capla/static/js/4a89d2db.adc8a307.chunk.js.map

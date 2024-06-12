@@ -1,0 +1,43 @@
+@startuml dataana
+skinparam defaultFontName AR PL UMing CN
+skinparam sequenceMessageAlign center
+participant 用户
+participant 注册页面
+participant 登录页面
+participant 业务功能处理
+
+
+用户-> 注册页面: 注册请求
+activate 用户
+activate 注册页面
+注册页面-> 业务功能处理:注册信息
+activate 业务功能处理
+业务功能处理-> 数据库:连接数据库
+activate 数据库
+数据库-> 数据库: 进行重复验证
+deactivate 注册页面
+deactivate 业务功能处理
+数据库--> 用户: 用户重复注册
+数据库--> 用户: 注册成功返回登录页面
+deactivate 数据库
+deactivate 用户
+
+
+
+用户-> 登录页面: 选择权限，请求登录
+activate 用户
+activate 登录页面
+登录页面-> 业务功能处理:登录用户信息
+activate 业务功能处理
+业务功能处理-> 数据库:连接数据库
+activate 数据库
+数据库-> 数据库: 验证用户权限、\n用户名、密码
+deactivate 登录页面
+deactivate 业务功能处理
+数据库--> 用户: 验证失败，提示错误
+数据库--> 用户: 登录成功，进入对应权限首页
+deactivate 数据库
+deactivate 用户
+
+
+@enduml

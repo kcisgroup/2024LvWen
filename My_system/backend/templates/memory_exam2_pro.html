@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>attention_exam2_pro</title>
+    <script src="../static/jspsych/dist/jspsych.js"></script>
+    <script src="../static/jspsych/dist/plugin-fullscreen.js"></script>
+    <script src="../static/jspsych/dist/plugin-preload.js"></script>
+    <script src="../static/jspsych/dist/plugin-html-keyboard-response.js"></script>
+    <script src="../static/jspsych/dist/plugin-html-button-response.js"></script>
+    <script src="../static/jspsych/dist/plugin-image-keyboard-response.js"></script>
+    <script src="../static/jspsych/dist/plugin-visual-search-circle.js"></script>
+    <script src="../static/jspsych/dist/plugin-webgazer-init-camera.js"></script>
+    <script src="../static/jspsych/dist/plugin-webgazer-calibrate.js"></script>
+    <script src="../static/jspsych/dist/plugin-webgazer-validate.js"></script>
+    <script src="../static/jspsych/examples/js/webgazer/webgazer.js"></script>
+    <script src="../static/jspsych/dist/extension-webgazer.js"></script>
+    <script src="../static/jspsych/dist/plugin-canvas-keyboard-response.js"></script>
+    <script src="../static/js/tool/konva.min.js"></script>
+    <script src="../static/jspsych/dist/plugin-survey.js"></script>
+    <script src="../static/jspsych/dist/plugin-survey-multi-choice.js"></script>
+    <script src="../static/jspsych/dist/plugin-survey-text.js"></script>
+    <script src="../static/js/tool/jquery-3.6.1.min.js"></script>
+    <link href="../static/jspsych/dist/jspsych.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body{
+            background-color: #c8c8c8;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<script src="../static/js/stimuli.js"></script>
+<script src="../static/js/exam_preload.js"></script>
+<script src="../static/js/variablesDesign.js"></script>
+<script src="../static/js/memory_exam2_pro.js"></script>
+<script>
+    var ISIs = '{{ ISI }}';
+    var Stimnumber = "{{ Stimnumber }}";
+    var StudyAttribute = "{{ StudyAttribute }}";
+    var TaskType = "{{ TaskType }}";
+    console.log(StudyAttribute)
+    window.onload = function () {
+        var fun = f1
+        fun(ISIs, TaskType, StudyAttribute)
+    }
+
+</script>
+</body>
+</html>

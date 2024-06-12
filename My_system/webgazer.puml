@@ -1,0 +1,90 @@
+@startuml
+class WebGazer {
+    -···(属性和方法)
+}
+class jsPsych {
+    -···(属性和方法)
+}
+class Konva {
+    -···(属性和方法)
+}
+
+class WebGazerExtension {
+    -webgazer:WebGazer
+    -jspsych:jsPsych
+    -currentGaze:{}
+    -currentTrialData:[]
+    -isBrowsingExternalPage:boolean
+    -on_start():void
+    -handleGazeDataUpdate(gazeData:[]):void
+    -on_finish():{}
+    -showVideo():void
+    -hideVideo():void
+    -···:其他属性和方法
+}
+
+class Stimulus {
+    - x: string
+    - y: string
+    - color:String
+    - style:String
+    - rotation:String
+    + toString():String
+}
+
+class StimuliInit {
+    -Konva:Konva
+    -Stimulus:Stimulus
+    +NoHole(Stimulus info):Konva.Group
+    +SingleHole(Stimulus info):Konva.Group
+    +DoubleHoles(Stimulus info):Konva.Group
+}
+
+
+class StimuliVariableDesign {
+    -Stimulus:Stimulus
+    -stimArray:[]
+    -stimColor:[]
+    -dist_loc:[]
+    +generatestim(Stimulus info):[]
+}
+
+class Exam_Preload {
+    -Stimulus:Stimulus
+    -webgazer:WebGazer
+    -StimuliInit:StimuliInit
+    -StimuliVariableDesign:StimuliVariableDesign
+    -WebGazerExtension:WebGazerExtension
+    -survey_before_trail:[]
+    +fixtion():Konva.Group
+    +generateTryTrail(StimuliVariableDesign info, StimuliInit info):{}
+    +generateRecognitionTrail(StimuliVariableDesign info, StimuliInit info):{}
+    +generateRecallTrail(StimuliVariableDesign info, StimuliInit info):{}
+    +RandomArray(array:[],target:String):[]
+    +...（其他方法）
+}
+
+class Exam_display {
+    -jspsych:jsPsych
+    -WebGazerExtension:WebGazerExtension
+    -Exam_Preload:Exam_Preload
+    -exam_intro:{}
+    -exam_timeline:[]
+    -initJsPsych(settings):{}
+    +FunRun():void
+}
+
+WebGazerExtension --> jsPsych
+WebGazerExtension --> WebGazer
+StimuliInit --> Stimulus
+StimuliInit --> Konva
+StimuliVariableDesign --> Stimulus
+Exam_display--> jsPsych
+Exam_display--> WebGazerExtension
+Exam_display--> Exam_Preload
+Exam_Preload--> Stimulus
+Exam_Preload--> WebGazer
+Exam_Preload--> StimuliInit
+Exam_Preload--> StimuliVariableDesign
+Exam_Preload--> WebGazerExtension
+@enduml

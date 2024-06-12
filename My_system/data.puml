@@ -1,0 +1,51 @@
+@startuml
+class Exam_Data {
+    - trial_index: Int
+    - rt: Int
+    - response: {}
+    - stimulus: []
+    - task: String
+    - ISI: String
+    - type: String
+    - size: Int
+    - webgazer_data: []
+    - webgazer_targets: {}
+    - webgazer_targets_data: []
+    - correct: Boolean
+    - response_target: String
+    - response_answer: Int
+}
+
+class DataProcess {
+    + datapro_recall(ISI: Int, SIZE: Int, PATH: String, PATH_SAVE: String): void
+    + datapro_recognition(ISI: Int, SIZE: Int, PATH: String, PATH_SAVE: String): void
+    + dfSave(DataFrame info): DataFrame
+    + preprocess_value(s: String): String
+    + process_data(path: String): DataFrame
+}
+
+class EyeDataProcess {
+    - ans_index:{}
+    + dictDefine(webgazer_data:[], stimuli:[], webgazer_targets_data:[], num:Int): []
+    + eyeDataProcess(webgazer_data:[], canvas_data:{}): []
+    + eyeData(path: String): void
+    + findTaggedKeys(dots: {}): []
+}
+
+class DataAnalysis {
+    - Exam_Data:Exam_Data
+    - ans_index:{}
+    + param_test(scvpath: String, Examtype: String): void
+    + drawData(path:String, assessment:String, Ttype:String, stimtype:String): []
+    + eyeDataAnalysis(path: String): void
+    + caculateHitrate(path: String): []
+}
+
+
+
+
+DataProcess --> Exam_Data
+EyeDataProcess --> Exam_Data
+DataAnalysis --> EyeDataProcess
+DataAnalysis --> DataProcess
+@enduml

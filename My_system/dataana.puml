@@ -1,0 +1,54 @@
+@startuml dataana
+skinparam defaultFontName AR PL UMing CN
+skinparam sequenceMessageAlign center
+participant 用户
+participant 数据上传服务
+participant 数据处理服务
+participant 数据分析服务
+participant 结果可视化服务
+participant 数据库
+
+
+用户-> 数据上传服务: 数据文件上传请求
+activate 用户
+activate 数据上传服务
+数据上传服务-> 数据库:数据文件（csv）
+activate 数据库
+数据库-> 数据库: 写入文件存储地址
+数据库--> 用户: 返回结果
+deactivate 数据上传服务
+deactivate 数据库
+deactivate 用户
+
+
+用户-> 数据处理服务: 请求数据处理
+activate 用户
+activate 数据处理服务
+数据处理服务-> 数据库: 条件数据
+activate 数据库
+数据库-> 数据库: 根据条件进行数据查询
+数据库--> 数据处理服务: 返回相应文件的存储地址
+数据处理服务-> 数据库: 处理后数据的存储地址
+数据库-> 数据库: 写入存储地址
+数据库--> 用户: 返回处理结果
+deactivate 数据处理服务
+deactivate 数据库
+deactivate 用户
+
+
+用户-> 数据分析服务: 请求数据分析
+activate 用户
+activate 数据分析服务
+数据分析服务-> 数据库: 条件数据
+activate 数据库
+数据库-> 数据库: 根据条件进行数据查询
+数据库--> 数据分析服务: 返回相应处理后的数据文件地址
+数据库--> 结果可视化服务: 返回相应处理后的数据文件地址
+deactivate 数据库
+activate 结果可视化服务
+数据分析服务--> 用户: 返回分析结果
+deactivate 数据分析服务
+结果可视化服务--> 用户: 返回可视化结果
+deactivate 结果可视化服务
+deactivate 用户
+@enduml

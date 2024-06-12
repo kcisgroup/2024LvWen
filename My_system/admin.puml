@@ -1,0 +1,63 @@
+@startuml dataana
+skinparam defaultFontName AR PL UMing CN
+skinparam sequenceMessageAlign center
+participant 用户
+participant 用户信息管理
+participant 系统用户管理
+participant 被试管理
+participant 实验管理
+participant 数据库
+
+
+用户-> 用户信息管理: 请求修改用户信息
+activate 用户
+activate 用户信息管理
+用户信息管理-> 数据库:修改的数据信息
+activate 数据库
+数据库-> 数据库: 进行用户查询
+数据库-> 数据库: 写入修改的数据
+数据库--> 用户: 返回结果
+deactivate 用户信息管理
+deactivate 数据库
+deactivate 用户
+
+用户-> 系统用户管理: 请求
+activate 用户
+activate 系统用户管理
+系统用户管理-> 数据库: 连接数据库
+activate 数据库
+数据库-> 数据库: 数据查询
+数据库-> 数据库: 数据操作
+数据库--> 用户: 返回查询结果
+deactivate 系统用户管理
+deactivate 数据库
+deactivate 用户
+
+用户-> 被试管理: 请求
+activate 用户
+activate 被试管理
+被试管理-> 数据库: 连接数据库
+activate 数据库
+数据库-> 数据库: 根据条件进行数据查询
+数据库--> 用户: 返回查询结果
+deactivate 被试管理
+deactivate 数据库
+deactivate 用户
+
+
+用户-> 实验管理: 请求
+activate 用户
+activate 实验管理
+实验管理-> 数据库: 连接数据库
+activate 数据库
+数据库-> 数据库: 数据查询
+数据库--> 实验管理: 实验信息
+用户-> 实验管理: 请求详细信息
+实验管理-> 数据库: 查询详细实验信息
+数据库-> 数据库: 数据查询
+数据库--> 实验管理: 查询结果
+deactivate 数据库
+实验管理--> 用户: 返回结果
+deactivate 实验管理
+deactivate 用户
+@enduml
